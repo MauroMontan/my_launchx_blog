@@ -1,6 +1,6 @@
 baseURL = "https://mauromontan.github.io/my_launchx_blog/"
 languageCode = "en-us"
-title = "Bitácora de Viaje"
+title = "Bitácora de Viaje de Mauro Montaño"
 theme = "hugo-winston-theme"
 relativeURLs = true
 canonifyURLs = true
