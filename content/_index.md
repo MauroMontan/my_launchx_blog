@@ -7,4 +7,9 @@ Hola ✌️  soy el explorer **Mauro** y este es mi blog personal donde comparti
 
 Te invito a conocer mis aprendizajes y leer mis experiencias.
 
+Mis expectativas para esta misión ✔:
+
+- Aprender a fondo conceptos básicos de backend
+- Realizar muchas prácticas para reforzar los conocimientos
+
 🚀
