@@ -83,22 +83,49 @@
 <p>si quieres correrlo localmente sigue las instrucciones dentro del mismo repositorio. ( No es necesario probarlo localmente )</p>
 </blockquote>
 <ul>
-<li>esta es la estructura de nuestro proyecto, te recomiendo observar cada uno de los archivos.</li>
+<li>Esta es la estructura de nuestro proyecto, te recomiendo observar cada uno de los archivos e incluso añadir más cosas para que sea más interactivo y más fácil de entender.</li>
 </ul>
 <p><img src="https://i.imgur.com/tdtW5K3.png" alt="project structure"></p>
-<h3 id="tests">Tests</h3>
-<p>En este punto nostros podemos ejecutar nuestras pruebas localmente, pero probar que nuestra aplicación funciona en un equipo de trabajo es muuy importante, esto nos da la confianza de que nuestra aplicación funcionará correctamente en producción. y la comunicación entre el equipo sera mejor.</p>
 <h5 id="en-nuestra-aplicación-podremos-encontrar-un-test-para-nuestro-modelo-y-un-test-para-saber-si-nuestra-base-de-datos-esta-conectada-correctamente">En nuestra aplicación podremos encontrar un test para nuestro modelo y un test para saber si nuestra base de datos esta conectada correctamente.</h5>
 <p>Esta es nuestra prueba para el model del Post. su unica función es conocer el modelo esta siendo instanciado correctamente.</p>
 <p><img src="https://i.imgur.com/hAFdBT5.png" alt="post model test"></p>
 <p>Esta es nuestra prueba para conocer si la base de datos se encuentra conectada.</p>
-<p><img src="blob:https://imgur.com/70d30c87-680e-4b85-8ed2-f8ac61ec47ea" alt="prisma test"></p>
-<p>Hasta ahora nuestros estas están corriendo correctamente localmente.</p>
+<p><img src="https://i.imgur.com/Iw6wmAy.png" alt="prisma test"></p>
+<p>Hasta ahora nuestras pruebas están corriendo correctamente localmente.</p>
 <p><img src="https://i.imgur.com/7PNaLjY.png" alt="tests passed"></p>
+<h5 id="aquí-es-dondé-comienza-lo-interesante">Aquí es dondé comienza lo interesante.</h5>
 <blockquote>
-<p>Conoce un poco sobre la sintaxis de yaml en los workflows <a href="https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions">aquí</a></p>
+<p>Necesitamos Conocer un poco sobre la sintaxis de yaml en los workflows <a href="https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions">aquí</a></p>
 </blockquote>
-
+<p>Cuando corremos un test dentro de nuestros workflows lo primero que podemos observar es que no tenemos nuestras variables de entorno y tampoco tenemos un servidor de postgres para poder hacer nuestras pruebas.</p>
+<ul>
+<li>Primero vamos a crear un archivo llamado test.yaml dentro del directorio &ldquo;.github/workflows/&rdquo;.</li>
+</ul>
+<p>podras encontrar el archivo completo dentro de este mismo repositorio.
+<a href="https://github.com/MauroMontan/postgres-gh-actions-demo/blob/main/.github/workflows/test.yaml">soy el test.yaml</a></p>
+<ul>
+<li>Observemos está fracción del código, es dondé especificaremos el servicio que usaremos y dondé colocaremos el url para la base de datos, con el usuario y la contraseña anteriormente especificada, lo demas dejalo como está.</li>
+</ul>
+<blockquote>
+<p>Recuerda que el usuario y la contraseña son de prueba, no coloques datos reales.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="w"> </span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">postgres</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">postgres</span><span class="w">
+</span><span class="w">        </span><span class="nt">env</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span><span class="nt">POSTGRES_USER</span><span class="p">:</span><span class="w"> </span><span class="l">postgres</span><span class="w">
+</span><span class="w">          </span><span class="nt">POSTGRES_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l">postgres</span><span class="w">
+</span><span class="w">        </span><span class="nt">options</span><span class="p">:</span><span class="w"> </span><span class="p">&gt;-</span><span class="sd">
+</span><span class="sd">          --health-cmd pg_isready
+</span><span class="sd">          --health-interval 10s
+</span><span class="sd">          --health-timeout 5s
+</span><span class="sd">          --health-retries 5</span><span class="w">          
+</span><span class="w">        </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span>- <span class="m">5432</span><span class="p">:</span><span class="m">5432</span><span class="w">
+</span><span class="w">    </span><span class="nt">env</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">DATABASE_URL</span><span class="p">:</span><span class="w"> </span><span class="l">postgresql://postgres:postgres@localhost:5432/explorers_api?schema=public</span><span class="w">
+</span><span class="w">      </span><span class="nt">PORT</span><span class="p">:</span><span class="w"> </span><span class="m">3030</span><span class="w">
+</span></code></pre></div>
     </div>
   </div>
 
