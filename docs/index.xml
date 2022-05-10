@@ -17,16 +17,6 @@
     </item>
     
     <item>
-      <title></title>
-      <link>https://mauromontan.github.io/my_launchx_blog/posts/psql-service-container/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://mauromontan.github.io/my_launchx_blog/posts/psql-service-container/</guid>
-      <description>Gitghub actions y postgresQl En este post te hablare sobre una fascinante función que provee GitHub Actions. Que creo esencial conocer y profundizar sobre ello. Se trata de los contenedores de servicios. Estos son contenedores que nos permiten alojar servicios como bases de datos y almacenamiento en caché. Al ser un tema tan extenso solo nos enfocaremos en la implementación del servicio de postgres.
-No soy experto en esto, pero al final de este post espero poder ayudarte con tus dudas e implementar postgres dentro de tus pruebas en github actions.</description>
-    </item>
-    
-    <item>
       <title>About me</title>
       <link>https://mauromontan.github.io/my_launchx_blog/pages/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -35,6 +25,16 @@ No soy experto en esto, pero al final de este post espero poder ayudarte con tus
       <description>Quien soy Hola, aquí vas a leer un poco sobre mi 🤩
  Me llamo Mauro Montaño soy un desarrollador full stack autodidacta, en su mayor parte usando Fastapi para el backend. enamorado con VUEjs y todo lo que se puede hacer con este framework de una manera tan facíl, me encuentro perdiendo el miedo a css y al diseño en general 😎
  Estudié la preparatoria en el centro de estudios científicos y tecnológicos “Miguel Bernard” en la carrera de metalurgia ⚒, Actualmente en el quinto semestre de la escuela superior de ingeniería mecánica y eléctrica, recientemente obtuve la certificación AZ-900: Microsoft Azure Fundamentals, disfruto mucho de crear aplicaciones de escritorio, aplicaciones web.</description>
+    </item>
+    
+    <item>
+      <title>Posgres en github Actions.</title>
+      <link>https://mauromontan.github.io/my_launchx_blog/posts/psql-service-container/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://mauromontan.github.io/my_launchx_blog/posts/psql-service-container/</guid>
+      <description>Gitghub actions y postgresQl En este post te hablare sobre una fascinante función que provee GitHub Actions. Que creo esencial conocer y profundizar sobre ello. Se trata de los contenedores de servicios. Estos son contenedores que nos permiten alojar servicios como bases de datos y almacenamiento en caché. Al ser un tema tan extenso solo nos enfocaremos en la implementación del servicio de postgres.
+No soy experto en esto, pero al final de este post espero poder ayudarte con tus dudas e implementar postgres dentro de tus pruebas en github actions.</description>
     </item>
     
   </channel>
