@@ -32,10 +32,34 @@ Ahora que sabemos un poco sobre docker es más fácil entender cómo es que este
 
 ### Comencemos
 
-clona o haz un fork de este reposotio: [app demo](https://github.com/MauroMontan/postgres-gh-actions-demo).
+haz un fork de este reposotio y clonalo en el lugar de tu preferencia: [app demo](https://github.com/MauroMontan/postgres-gh-actions-demo).
 
 > si quieres correrlo localmente sigue las instrucciones dentro del mismo repositorio. ( No es necesario probarlo localmente )
 
-- esta es la estructura de nuestro proyecto
+- esta es la estructura de nuestro proyecto, te recomiendo observar cada uno de los archivos.
 
-![project structure](https://i.imgur.com/tdtW5K3.png) 
+![project structure](https://i.imgur.com/tdtW5K3.png)
+
+### Tests
+
+En este punto nostros podemos ejecutar nuestras pruebas localmente, pero probar que nuestra aplicación funciona en un equipo de trabajo es muuy importante, esto nos da la confianza de que nuestra aplicación funcionará correctamente en producción. y la comunicación entre el equipo sera mejor.
+
+
+##### En nuestra aplicación podremos encontrar un test para nuestro modelo y un test para saber si nuestra base de datos esta conectada correctamente.
+
+Esta es nuestra prueba para el model del Post. su unica función es conocer el modelo esta siendo instanciado correctamente.
+
+![post model test](https://i.imgur.com/hAFdBT5.png) 
+
+Esta es nuestra prueba para conocer si la base de datos se encuentra conectada. 
+
+![prisma test](blob:https://imgur.com/70d30c87-680e-4b85-8ed2-f8ac61ec47ea) 
+
+
+
+Hasta ahora nuestros estas están corriendo correctamente localmente.
+
+![tests passed](https://i.imgur.com/7PNaLjY.png) 
+
+
+> Conoce un poco sobre la sintaxis de yaml en los workflows [aquí](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions) 
