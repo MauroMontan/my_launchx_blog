@@ -16,7 +16,7 @@ No soy experto en esto, pero al final de este post espero poder ayudarte con tus
 
 Un contenedor de Docker agrupa el código de una aplicación con las dependencias y archivos de configuración necesarios, así como también puede incluir entornos de tiempo de ejecución o compiladores necesarios para que la aplicación se ejecute. Esta agrupación permite aislar nuestra aplicación y poderla ejecutar en diferentes entornos sin comprometer la compatibilidad.
 
-![docker example]( ../../static/blogs_assets/postgres_images/docker_example.png ) 
+![docker example]( https://i.imgur.com/9jYW7FY.png ) 
 
 #### Que son las imágenes de docker ?
 
@@ -38,4 +38,4 @@ clona o haz un fork de este reposotio: [app demo](https://github.com/MauroMontan
 
 - esta es la estructura de nuestro proyecto
 
-![project structure](./) 
+![project structure](https://i.imgur.com/tdtW5K3.png) 
