@@ -16,5 +16,15 @@
       <description>Algo muy importante en la vida de un desarrollador de software es saber que está pasando a su alrededor, entender las necesidades de las personas y las empresas, esto ayuda a pensar en como podemos solucionar los problemas. Cuando logramos solucionar un problema obtenemos cierta experiencia y conocimientos que potencialmente nos ayudara a solucionar problemas idénticos de una manera más eficiente. O desarrollar herramientas que lo resuelvan.</description>
     </item>
     
+    <item>
+      <title></title>
+      <link>https://mauromontan.github.io/my_launchx_blog/posts/psql-service-container/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://mauromontan.github.io/my_launchx_blog/posts/psql-service-container/</guid>
+      <description>Gitghub actions y postgresQl En este post te hablare sobre una fascinante función que provee GitHub Actions. Que creo esencial conocer y profundizar sobre ello. Se trata de los contenedores de servicios. Estos son contenedores que nos permiten alojar servicios como bases de datos y almacenamiento en caché. Al ser un tema tan extenso solo nos enfocaremos en la implementación del servicio de postgres.
+No soy experto en esto, pero al final de este post espero poder ayudarte con tus dudas e implementar postgres dentro de tus pruebas en github actions.</description>
+    </item>
+    
   </channel>
 </rss>
