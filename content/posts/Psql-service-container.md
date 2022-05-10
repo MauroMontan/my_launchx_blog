@@ -36,13 +36,10 @@ haz un fork de este reposotio y clonalo en el lugar de tu preferencia: [app demo
 
 > si quieres correrlo localmente sigue las instrucciones dentro del mismo repositorio. ( No es necesario probarlo localmente )
 
-- esta es la estructura de nuestro proyecto, te recomiendo observar cada uno de los archivos.
+
+- Esta es la estructura de nuestro proyecto, te recomiendo observar cada uno de los archivos e incluso añadir más cosas para que sea más interactivo y más fácil de entender.
 
 ![project structure](https://i.imgur.com/tdtW5K3.png)
-
-### Tests
-
-En este punto nostros podemos ejecutar nuestras pruebas localmente, pero probar que nuestra aplicación funciona en un equipo de trabajo es muuy importante, esto nos da la confianza de que nuestra aplicación funcionará correctamente en producción. y la comunicación entre el equipo sera mejor.
 
 
 ##### En nuestra aplicación podremos encontrar un test para nuestro modelo y un test para saber si nuestra base de datos esta conectada correctamente.
@@ -53,13 +50,47 @@ Esta es nuestra prueba para el model del Post. su unica función es conocer el m
 
 Esta es nuestra prueba para conocer si la base de datos se encuentra conectada. 
 
-![prisma test](blob:https://imgur.com/70d30c87-680e-4b85-8ed2-f8ac61ec47ea) 
+![prisma test](https://i.imgur.com/Iw6wmAy.png) 
 
 
-
-Hasta ahora nuestros estas están corriendo correctamente localmente.
+Hasta ahora nuestras pruebas están corriendo correctamente localmente.
 
 ![tests passed](https://i.imgur.com/7PNaLjY.png) 
 
 
-> Conoce un poco sobre la sintaxis de yaml en los workflows [aquí](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions) 
+
+##### Aquí es dondé comienza lo interesante.
+
+
+> Necesitamos Conocer un poco sobre la sintaxis de yaml en los workflows [aquí](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions) 
+
+
+Cuando corremos un test dentro de nuestros workflows lo primero que podemos observar es que no tenemos nuestras variables de entorno y tampoco tenemos un servidor de postgres para poder hacer nuestras pruebas.
+
+- Primero vamos a crear un archivo llamado test.yaml dentro del directorio ".github/workflows/". 
+
+podras encontrar el archivo completo dentro de este mismo repositorio.
+[soy el test.yaml](https://github.com/MauroMontan/postgres-gh-actions-demo/blob/main/.github/workflows/test.yaml) 
+
+- Observemos está fracción del código, es dondé especificaremos el servicio que usaremos y dondé colocaremos el url para la base de datos, con el usuario y la contraseña anteriormente especificada, lo demas dejalo como está.
+
+> Recuerda que el usuario y la contraseña son de prueba, no coloques datos reales. 
+```yaml
+ services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+    env:
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/explorers_api?schema=public
+      PORT: 3030
+```
+
