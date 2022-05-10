@@ -78,14 +78,26 @@
 </li>
 </ul>
 <h3 id="comencemos">Comencemos</h3>
-<p>clona o haz un fork de este reposotio: <a href="https://github.com/MauroMontan/postgres-gh-actions-demo">app demo</a>.</p>
+<p>haz un fork de este reposotio y clonalo en el lugar de tu preferencia: <a href="https://github.com/MauroMontan/postgres-gh-actions-demo">app demo</a>.</p>
 <blockquote>
 <p>si quieres correrlo localmente sigue las instrucciones dentro del mismo repositorio. ( No es necesario probarlo localmente )</p>
 </blockquote>
 <ul>
-<li>esta es la estructura de nuestro proyecto</li>
+<li>esta es la estructura de nuestro proyecto, te recomiendo observar cada uno de los archivos.</li>
 </ul>
 <p><img src="https://i.imgur.com/tdtW5K3.png" alt="project structure"></p>
+<h3 id="tests">Tests</h3>
+<p>En este punto nostros podemos ejecutar nuestras pruebas localmente, pero probar que nuestra aplicación funciona en un equipo de trabajo es muuy importante, esto nos da la confianza de que nuestra aplicación funcionará correctamente en producción. y la comunicación entre el equipo sera mejor.</p>
+<h5 id="en-nuestra-aplicación-podremos-encontrar-un-test-para-nuestro-modelo-y-un-test-para-saber-si-nuestra-base-de-datos-esta-conectada-correctamente">En nuestra aplicación podremos encontrar un test para nuestro modelo y un test para saber si nuestra base de datos esta conectada correctamente.</h5>
+<p>Esta es nuestra prueba para el model del Post. su unica función es conocer el modelo esta siendo instanciado correctamente.</p>
+<p><img src="https://i.imgur.com/hAFdBT5.png" alt="post model test"></p>
+<p>Esta es nuestra prueba para conocer si la base de datos se encuentra conectada.</p>
+<p><img src="blob:https://imgur.com/70d30c87-680e-4b85-8ed2-f8ac61ec47ea" alt="prisma test"></p>
+<p>Hasta ahora nuestros estas están corriendo correctamente localmente.</p>
+<p><img src="https://i.imgur.com/7PNaLjY.png" alt="tests passed"></p>
+<blockquote>
+<p>Conoce un poco sobre la sintaxis de yaml en los workflows <a href="https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions">aquí</a></p>
+</blockquote>
 
     </div>
   </div>
