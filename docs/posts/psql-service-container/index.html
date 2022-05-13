@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Posgres en github Actions. - Bitácora de Viaje de Mauro Montaño</title>
+  <title>Postgres en github Actions. - Bitácora de Viaje de Mauro Montaño</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="https://mauromontan.github.io/my_launchx_blog/favicon.png">
 
@@ -15,7 +15,7 @@
 
   
     <meta name="description" content="Pequeña prueba con github actions y contenedores de servicios "/>
-    <meta property="og:title" content="Posgres en github Actions."/>
+    <meta property="og:title" content="Postgres en github Actions."/>
     <meta property="og:type" content="website"/>
     <meta property="og:url" content="https://mauromontan.github.io/my_launchx_blog/posts/psql-service-container/"/>
     
@@ -55,20 +55,15 @@
   <div class="blog">
     
     <div class="intro">
-      <h1>Posgres en github Actions.<span class="dot">.</span></h1>
+      <h1>Postgres en github Actions.<span class="dot">.</span></h1>
       
     </div>
     <div class="content">
       <h1 id="gitghub-actions-y-postgresql">Gitghub actions y postgresQl</h1>
 <p>En este post te hablare sobre una fascinante función que provee GitHub Actions. Que creo esencial conocer y profundizar sobre ello. Se trata de los contenedores de servicios. Estos son contenedores que nos permiten alojar servicios como bases de datos y almacenamiento en caché. Al ser un tema tan extenso solo nos enfocaremos en la implementación del servicio de postgres.</p>
-<p>No soy experto en esto, pero al final de este post espero poder ayudarte con tus dudas e implementar postgres dentro de tus pruebas en github actions. si ya conoces docker puedes saltarte esta breve explicación.</p>
-<h4 id="que-es-un-contenedor-de-dockerhttpswwwdockercom">Que es un contenedor de <a href="https://www.docker.com/">Docker</a>?</h4>
-<p>Un contenedor de Docker agrupa el código de una aplicación con las dependencias y archivos de configuración necesarios, así como también puede incluir entornos de tiempo de ejecución o compiladores necesarios para que la aplicación se ejecute. Esta agrupación permite aislar nuestra aplicación y poderla ejecutar en diferentes entornos sin comprometer la compatibilidad.</p>
-<p><img src="https://i.imgur.com/9jYW7FY.png" alt="docker example"></p>
-<h4 id="que-son-las-imágenes-de-docker-">Que son las imágenes de docker ?</h4>
-<p>Las imágenes son plantillas construidas a partir de un dockerfile (un archivo de configuración). Que contiene las instrucciones específicas para instalar lo que necesita, como se va a ejecutar, y que es lo que va a ejecutar. Esta imagen compilada es lo que nos permitirá ejecutar un contenedor con estas especificaciones.</p>
-<h3 id="contenedores-de-servicios">Contenedores de servicios</h3>
-<p>Ahora que sabemos un poco sobre docker es más fácil entender cómo es que este servicio puede correr dentro de nuestro entorno virtual de GitHub actions. Por qué sí, estos contenedores de servicios son imágenes de docker !. Esto es bastante útil porque los workflows de GitHub actions pueden correr en diferentes entornos virtuales y de esta manera no perdemos compatibilidad.</p>
+<p>No soy experto en esto, pero al final de este post espero poder ayudarte con tus dudas e implementar postgres dentro de tus pruebas en github actions.</p>
+<h4 id="contenedores-de-servicios">Contenedores de servicios</h4>
+<p>Los contenedores de servicio y los entornos virtuales no son lo mismo, los contenedores de servicio se ejecutan en el entorno.</p>
 <ul>
 <li>
 <p><a href="https://github.com/actions/virtual-environments">aquí puedes ver los entornos virtuales disponibles</a></p>
@@ -78,34 +73,8 @@
 </li>
 </ul>
 <h3 id="comencemos">Comencemos</h3>
-<p>haz un fork de este reposotio y clonalo en el lugar de tu preferencia: <a href="https://github.com/MauroMontan/postgres-gh-actions-demo">app demo</a>.</p>
-<blockquote>
-<p>si quieres correrlo localmente sigue las instrucciones dentro del mismo repositorio. ( No es necesario probarlo localmente )</p>
-</blockquote>
-<ul>
-<li>Esta es la estructura de nuestro proyecto, te recomiendo observar cada uno de los archivos e incluso añadir más cosas para que sea más interactivo y más fácil de entender.</li>
-</ul>
-<p><img src="https://i.imgur.com/tdtW5K3.png" alt="project structure"></p>
-<h5 id="en-nuestra-aplicación-podremos-encontrar-un-test-para-nuestro-modelo-y-un-test-para-saber-si-nuestra-base-de-datos-esta-conectada-correctamente">En nuestra aplicación podremos encontrar un test para nuestro modelo y un test para saber si nuestra base de datos esta conectada correctamente.</h5>
-<p>Esta es nuestra prueba para el model del Post. su unica función es conocer el modelo esta siendo instanciado correctamente.</p>
-<p><img src="https://i.imgur.com/hAFdBT5.png" alt="post model test"></p>
-<p>Esta es nuestra prueba para conocer si la base de datos se encuentra conectada.</p>
-<p><img src="https://i.imgur.com/Iw6wmAy.png" alt="prisma test"></p>
-<p>Hasta ahora nuestras pruebas están corriendo correctamente localmente.</p>
-<p><img src="https://i.imgur.com/7PNaLjY.png" alt="tests passed"></p>
-<h5 id="aquí-es-dondé-comienza-lo-interesante">Aquí es dondé comienza lo interesante.</h5>
-<blockquote>
-<p>Necesitamos Conocer un poco sobre la sintaxis de yaml en los workflows <a href="https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions">aquí</a></p>
-</blockquote>
-<p>Cuando corremos un test dentro de nuestros workflows lo primero que podemos observar es que no tenemos nuestras variables de entorno y tampoco tenemos un servidor de postgres para poder hacer nuestras pruebas.</p>
-<ul>
-<li>Primero vamos a crear un archivo llamado test.yaml dentro del directorio &ldquo;.github/workflows/&rdquo;.</li>
-</ul>
-<p>podras encontrar el archivo completo dentro de este mismo repositorio.
-<a href="https://github.com/MauroMontan/postgres-gh-actions-demo/blob/main/.github/workflows/test.yaml">soy el test.yaml</a></p>
-<ul>
-<li>Observemos está fracción del código, es dondé especificaremos el servicio que usaremos y dondé colocaremos el url para la base de datos, con el usuario y la contraseña anteriormente especificada, lo demas dejalo como está.</li>
-</ul>
+<p>Puedes revisar este demo con la implementación de postgres : <a href="https://github.com/MauroMontan/postgres-gh-actions-demo">app demo</a>.</p>
+<h5 id="observemos-está-fracción-del-código-es-dondé-especificaremos-el-servicio-que-usaremos-y-dondé-colocaremos-el-url-para-la-base-de-datos-con-el-usuario-y-la-contraseña-anteriormente-especificada-lo-demas-dejalo-como-está">Observemos está fracción del código, es dondé especificaremos el servicio que usaremos y dondé colocaremos el url para la base de datos, con el usuario y la contraseña anteriormente especificada, lo demas dejalo como está.</h5>
 <blockquote>
 <p>Recuerda que el usuario y la contraseña son de prueba, no coloques datos reales.</p>
 </blockquote>
@@ -125,7 +94,33 @@
 </span><span class="w">    </span><span class="nt">env</span><span class="p">:</span><span class="w">
 </span><span class="w">      </span><span class="nt">DATABASE_URL</span><span class="p">:</span><span class="w"> </span><span class="l">postgresql://postgres:postgres@localhost:5432/explorers_api?schema=public</span><span class="w">
 </span><span class="w">      </span><span class="nt">PORT</span><span class="p">:</span><span class="w"> </span><span class="m">3030</span><span class="w">
-</span></code></pre></div>
+</span></code></pre></div><p>eso es lo que debes agregar dentro de tu workflow. OJO! recuerda cuidar la indentación. la opción de &ldquo;services&rdquo; va dentro de tu job.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"> test:
+    # Este el es entorno que el que se ejecutara nuestor job
+    runs-on: ubuntu-latest
+    # Aque es donde se colocan y configuran nuestros service containers
+    services:
+</code></pre></div><p>En los steps de tu job ejecutaras lo necesario para poder ejecutar tus tests de prisma con jest</p>
+<blockquote>
+<p>Recuerda que debes usar la versión de node de tu proyecto, y ejecutar cualquier comando que necesites para correr tus tests.</p>
+</blockquote>
+<p>En este caso estamos usando prisma y necesitaremos crear algunos datos de prueba, para eso es ocupamos ejecurtar un archivo seed.js, y posteriormente realizar las migraciones a las tablas de postgres. Recuerda que esto depende de tu proyecto.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">   steps:
+      # Aquí colocamos las instrucciones de nuestro proyecto
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          # version de node en la que correra el test
+          node-version: &#39;18.x&#39;
+          # this install node dependencies
+      - run: npm install
+          # this command creates prisma migration ( remove if you are not using prisma)
+      - run: npx prisma migrate dev --name init
+          # this command creates fake data to test database connection
+      - run: npm run seed
+          # this is the jest command
+      - run: npm run test
+</code></pre></div>
     </div>
   </div>
 
